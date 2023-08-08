@@ -7,9 +7,15 @@
     <!-- App.vue只需要留一个路由出口 router-view即可 -->
     <router-view></router-view>
   </div>
+
+  <div class="test">test scss</div>
 </template>
 
-<style scoped>
+<style scoped lang="scss">
+
+.test {
+  color: $helpColor;
+}
 header {
   line-height: 1.5;
 }
