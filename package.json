@@ -12,6 +12,7 @@
     "test:unit:dev": "cypress open --component"
   },
   "dependencies": {
+    "element-plus": "^2.3.9",
     "eslint": "^8.46.0",
     "pinia": "^2.1.6",
     "vue": "^3.3.4",
@@ -21,6 +22,8 @@
     "@vitejs/plugin-vue": "^4.2.3",
     "cypress": "^12.17.2",
     "start-server-and-test": "^2.0.0",
+    "unplugin-auto-import": "^0.16.6",
+    "unplugin-vue-components": "^0.25.1",
     "vite": "^4.4.6"
   }
 }
