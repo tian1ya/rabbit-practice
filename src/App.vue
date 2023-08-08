@@ -1,16 +1,12 @@
 <script setup>
-// import HelloWorld from './components/HelloWorld.vue'
-// import TheWelcome from './components/TheWelcome.vue'
 
 </script>
 
 <template>
-  <header>
-    <el-button type="primary"> button </el-button>
-  </header>
-
-  <main>
-  </main>
+  <div>
+    <!-- App.vue只需要留一个路由出口 router-view即可 -->
+    <router-view></router-view>
+  </div>
 </template>
 
 <style scoped>
