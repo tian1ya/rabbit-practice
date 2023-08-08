@@ -11,9 +11,6 @@ import {
 import router from '@/routers'
 import App from './App.vue'
 
-import {
-  getCategoryAPI
-} from '@/apis/testAPI'
 
 // 引入初始化样式文件
 import '@/styles/common.scss'
