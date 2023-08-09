@@ -6,7 +6,6 @@ const banners = ref([]);
 const getBanners = async () => {
   const res = await getBannerAPI();
   banners.value = res.result;
-  console.log(res);
 };
 
 onMounted(() => getBanners());
