@@ -6,8 +6,6 @@ import { onMounted, ref } from "vue";
 const news = ref([]);
 const newsApi = async () => {
   const res = await findNewAPI();
-  console.log(res);
-  console.log(res.result);
   news.value = res.result;
 };
 
@@ -20,7 +18,7 @@ onMounted(() => newsApi());
       <ul class="goods-list">
         <li v-for="item in news" :key="item.id">
           <RouterLink to="/">
-            <img :src="item.picture" alt="" />
+            <img v-img-lazy="item.picture" alt="" />
             <p class="name">{{ item.name }}</p>
             <p class="price">&yen;{{ item.price }}</p>
           </RouterLink>
