@@ -19,7 +19,7 @@ defineProps({
         <h3>{{ title }}<small>{{ subtitle }}</small></h3>
       </div>
       <!-- 主体内容区域 -->
-      <slot></slot>
+      <slot name="main"></slot>
     </div>
   </div>
 </template>
