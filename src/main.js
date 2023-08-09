@@ -8,7 +8,8 @@ import {
   createApp
 } from 'vue'
 
-import router from '@/routers'
+// import router from '@/routers/index'
+import router from './routers'
 import App from './App.vue'
 
 // 指令插件
