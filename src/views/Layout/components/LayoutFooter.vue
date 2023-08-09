@@ -5,6 +5,7 @@
       <div class="container">
         <dl>
           <dt>客户服务</dt>
+          <!-- class 来自于案例图标，在index.html 中引入的 -->
           <dd><i class="iconfont icon-kefu"></i> 在线客服</dd>
           <dd><i class="iconfont icon-question"></i> 问题反馈</dd>
         </dl>
