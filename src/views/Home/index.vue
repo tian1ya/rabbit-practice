@@ -15,8 +15,4 @@ import HomeProduct from './components/HomeProduct.vue'
   <HomeNew />
   <HomeHot />
   <HomeProduct />
-
-  <!-- <HomePanel title="title" subtitle="subtitle">
-    我是Slot
-  </HomePanel> -->
 </template>
