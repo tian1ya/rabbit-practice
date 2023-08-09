@@ -14,7 +14,10 @@ const router = createRouter({
     {
       path: '/',
       component: Layout,
-      children: []
+      children: [{
+        path:'',
+        component: Home
+      }]
     }
   ]
 })
