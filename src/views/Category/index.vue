@@ -1,31 +1,11 @@
 <script setup>
 import GoodsItem from "@/views/Home/components/GoodItem.vue";
-
-
 import { useBanner } from "./composables/useBanner";
 import { useCategory } from "./composables/useCategory";
-
-
 
 const { catBanners } = useBanner();
 const { categoryData } = useCategory();
 
-// const categoryData = ref([]);
-
-// const getCategories = async (id = router.params.id) => {
-//   const res = await getCategoryAPI(id);
-//   categoryData.value = res.result;
-// };
-
-// getCategories();
-
-// 组件复用，期望在切换header 的时候，banner 不变
-// 但是请求需要带着新传入的参数重写发起，获取切换header 后对应的数据
-// 路由变化的时候会触发该函数，并带着to 参数
-// 改参数中有 fullpath、params， 这里只用 params
-// onBeforeRouteUpdate((to) => {
-//   useCategory(to.params.id);
-// });
 </script>
 
 <template>
@@ -52,7 +32,7 @@ const { categoryData } = useCategory();
         <h3>全部分类</h3>
         <ul>
           <li v-for="i in categoryData.children" :key="i.id">
-            <RouterLink to="/">
+            <RouterLink :to="`/category/sub/${i.id}`">
               <img :src="i.picture" />
               <p>{{ i.name }}</p>
             </RouterLink>
