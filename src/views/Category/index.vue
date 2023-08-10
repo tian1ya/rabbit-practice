@@ -4,6 +4,7 @@ import { getBannerAPI } from "@/apis/home";
 import GoodsItem from "@/views/Home/components/GoodItem.vue";
 import { ref } from "vue";
 import { useRoute } from "vue-router";
+import { onBeforeRouteUpdate } from "vue-router";
 
 // 路由中获取参数
 const router = useRoute();
@@ -19,12 +20,20 @@ const getBanners = async () => {
 
 getBanners();
 
-const getCategories = async () => {
-  const res = await getCategoryAPI(router.params.id);
+const getCategories = async (id = router.params.id) => {
+  const res = await getCategoryAPI(id);
   categoryData.value = res.result;
 };
 
 getCategories();
+
+// 组件复用，期望在切换header 的时候，banner 不变
+// 但是请求需要带着新传入的参数重写发起，获取切换header 后对应的数据
+// 路由变化的时候会触发该函数，并带着to 参数
+// 改参数中有 fullpath、params， 这里只用 params
+onBeforeRouteUpdate((to) => {
+  getCategories(to.params.id)
+})
 </script>
 
 <template>
