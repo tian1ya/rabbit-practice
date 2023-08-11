@@ -21,14 +21,21 @@ const router = createRouter({
     children: [{
       path: '',
       component: Home
-    },{
+    }, {
       path: 'category/:id',
       component: Category
-    },{
+    }, {
       path: 'category/sub/:id',
       component: SubCategory
     }]
-  }]
-})
+  }],
+
+  // 路由行为定制, 切换路由的时候，回到顶部显示
+  scrollBehavior() {
+    return {
+      top: 0
+    }
+  }
+});
 
 export default router
