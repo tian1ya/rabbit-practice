@@ -1,8 +1,10 @@
 <script setup>
 import { useRoute } from "vue-router";
-
+import DetailHot from './components/DetailHot.vue'
 import { getGoodsDetailAPI } from "@/apis/detail";
+import { fetchHotGoodsAPI } from "@/apis/detail";
 import { ref, onMounted } from "vue";
+import DetailHotVue from "./components/DetailHot.vue";
 
 const route = useRoute();
 const goodDetail = ref({});
@@ -127,7 +129,12 @@ onMounted(() => getDetail());
               </div>
             </div>
             <!-- 24热榜+专题推荐 -->
-            <div class="goods-aside"></div>
+            <div class="goods-aside">
+              <!-- 24h -->
+              <DetailHot></DetailHot>
+              <!-- 周 -->
+              <DetailHot></DetailHot>
+            </div>
           </div>
         </div>
       </div>
