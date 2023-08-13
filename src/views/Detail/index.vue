@@ -1,13 +1,14 @@
 <script setup>
 import { useRoute } from "vue-router";
-import DetailHot from './components/DetailHot.vue'
+import DetailHot from "./components/DetailHot.vue";
 import { getGoodsDetailAPI } from "@/apis/detail";
 import { fetchHotGoodsAPI } from "@/apis/detail";
 import { ref, onMounted } from "vue";
 import DetailHotVue from "./components/DetailHot.vue";
-// import ImageView from '@/components/imageView/index.vue'
-// import XtxSku from '@/components/XtxSku/index.vue'
+import { ElMessage } from "element-plus";
+import { useCartStore } from '@/stores/cart'
 
+const userCart = useCartStore();
 const route = useRoute();
 const goodDetail = ref({});
 
@@ -19,9 +20,38 @@ const getDetail = async () => {
 onMounted(() => getDetail());
 
 // 当选中sku 的时候触发事件
+let skuObj = {};
 const skuChange = (sku) => {
+  console.log("skuChange", sku);
+  skuObj = sku
+};
+
+const count = ref(0);
+const countChange = (sku) => {
   console.log(sku);
-}
+};
+
+const addCart = () => {
+  console.log("skuChange2", skuObj);
+  if (skuObj.skuId) {
+    const addedGoods = {
+      id: goodDetail.value.id,
+      name: goodDetail.value.name,
+      picture: goodDetail.value.mainPictures[0],
+      price: goodDetail.value.price,
+      count: count.value,
+      skuId: skuObj.skuId,
+      atrrsText: skuObj.specsText, 
+      selected: true
+    }
+
+    userCart.addCart(addedGoods)
+    // 已经选择
+  } else {
+    // 提供用户
+    ElMessage.warning("请选择规格");
+  }
+};
 </script>
 
 <template>
@@ -103,12 +133,14 @@ const skuChange = (sku) => {
                 </dl>
               </div>
               <!-- sku组件 -->
-              <XtxSku :goods = "goodDetail" @change="skuChange"></XtxSku>
+              <XtxSku :goods="goodDetail" @change="skuChange"></XtxSku>
               <!-- 数据组件 -->
-
+              <el-input-number v-model="count" @change="countChange" />
               <!-- 按钮组件 -->
               <div>
-                <el-button size="large" class="btn"> 加入购物车 </el-button>
+                <el-button size="large" class="btn" @click="addCart">
+                  加入购物车
+                </el-button>
               </div>
             </div>
           </div>
@@ -131,7 +163,12 @@ const skuChange = (sku) => {
                     </li>
                   </ul>
                   <!-- 图片 -->
-                  <img v-for="url in goodDetail.details.pictures" :key="url" :src="url" alt="">
+                  <img
+                    v-for="url in goodDetail.details.pictures"
+                    :key="url"
+                    :src="url"
+                    alt=""
+                  />
                 </div>
               </div>
             </div>
