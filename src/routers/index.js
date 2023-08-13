@@ -28,10 +28,13 @@ const router = createRouter({
     }, {
       path: 'category/sub/:id',
       component: SubCategory
-    },{
+    }, {
       path: 'detail/:id',
       component: Detail
     }]
+  }, {
+    path: '/login',
+    component: Login
   }],
 
   // 路由行为定制, 切换路由的时候，回到顶部显示
