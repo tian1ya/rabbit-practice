@@ -1,7 +1,21 @@
 <script setup>
+import { ref } from "vue";
+
+// 表单校验功能：
+// 账号名 + 密码
+const from = ref({
+  account: "",
+  password: "",
+});
+
+const rules = {
+  account: [{ required: true, message: '用户名不能为空', trigger: 'blur' }],
+  password: [
+    { required: true, message: "密码不能为空", trigger: "blur" },
+    { min: 6, max: 14, message: '密码长度需大于6,小于14', trigger: 'blur' },
+  ],
+};
 </script>
-
-
 <template>
   <div>
     <header class="login-header">
@@ -23,12 +37,18 @@
         </nav>
         <div class="account-box">
           <div class="form">
-            <el-form label-position="right" label-width="60px" status-icon>
-              <el-form-item label="账户">
-                <el-input />
+            <el-form
+              label-position="right"
+              label-width="60px"
+              status-icon
+              :model="from"
+              :rules="rules"
+            >
+              <el-form-item label="账户" prop="account">
+                <el-input v-model="from.account"/>
               </el-form-item>
-              <el-form-item label="密码">
-                <el-input />
+              <el-form-item label="密码" prop="password">
+                <el-input v-model="from.password"/>
               </el-form-item>
               <el-form-item label-width="22px">
                 <el-checkbox size="large">
