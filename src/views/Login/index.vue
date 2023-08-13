@@ -1,8 +1,10 @@
 <script setup>
 import { ref } from "vue";
-import { loginAPI } from "@/apis/user";
 import { ElMessage } from "element-plus";
 import { useRouter } from 'vue-router'
+import { useUserStore } from "@/stores/user";
+
+const userStore = useUserStore()
 
 const router = useRouter()
 // 表单校验功能：
@@ -36,9 +38,9 @@ const rules = {
 const fromRef = ref(null);
 const doLogin = () => {
   const { account, password } = from.value;
-  fromRef.value.validate(async (valid) => {
+  fromRef.value.validate((valid) => {
     if (valid) {
-      const res = await loginAPI({ account, password });
+      userStore.doUserLogin({ account, password });
 
       // 提示
       ElMessage({
@@ -50,7 +52,6 @@ const doLogin = () => {
       // 跳转首页
       // router.push('/')
       router.replace({ path: '/'})
-      console.log(res);
     }
   });
 };

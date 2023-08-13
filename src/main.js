@@ -1,10 +1,6 @@
 import './assets/main.css'
 
 import {
-  createPinia
-} from 'pinia'
-
-import {
   createApp
 } from 'vue'
 
@@ -25,10 +21,16 @@ import {
 // 引入初始化样式文件
 import '@/styles/common.scss'
 
+import { createPinia } from 'pinia'
+import piniaPluginPersistedstate from 'pinia-plugin-persistedstate'
+
+
 const app = createApp(App)
 
+const pinia = createPinia()
+pinia.use(piniaPluginPersistedstate)
 
-app.use(createPinia())
+app.use(pinia)
 // 会执行 插件中的 install 方法
 app.use(lazyPlugin)
 app.use(componentPlugins)

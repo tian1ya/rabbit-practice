@@ -1,16 +1,25 @@
 <script setup>
+import { useUserStore } from "@/stores/user";
+import { useRouter } from 'vue-router'
 
+const userStore = useUserStore()
+
+const rouer = useRouter()
+const logoutConfirm = () => {
+  userStore.clearUserInfo()
+  rouer.push('/login')
+}
 </script>
 
 <template>
   <nav class="app-topnav">
     <div class="container">
       <ul>
-        <!-- 多模板渲染，区分登录状态和非登录状态 -->
-        <template v-if="false">
-          <li><a href="javascript:;"><i class="iconfont icon-user"></i>周杰伦</a></li>
+        <!-- 多模板渲染，区分登录状态和非登录状态, token 存在，那么就是登录状态 -->
+        <template v-if="userStore.userInfo.token">
+          <li><a href="javascript:;"><i class="iconfont icon-user"></i>{{ userStore.userInfo.account }}</a></li>
           <li>
-            <el-popconfirm title="确认退出吗?" confirm-button-text="确认" cancel-button-text="取消">
+            <el-popconfirm title="确认退出吗?" confirm-button-text="确认" cancel-button-text="取消" @confirm="logoutConfirm">
               <template #reference>
                 <a href="javascript:;">退出登录</a>
               </template>
