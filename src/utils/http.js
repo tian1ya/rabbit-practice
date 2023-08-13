@@ -1,5 +1,5 @@
 import axios from "axios";
-
+import { ElMessage } from "element-plus";
 
 const httpInstance = axios.create({
   baseURL: 'http://pcapi-xiaotuxian-front-devtest.itheima.net',
@@ -13,6 +13,13 @@ httpInstance.interceptors.request.use(config => {
 
 // axios响应式拦截器
 httpInstance.interceptors.response.use(res => res.data, e => {
+  
+    // 提示
+    ElMessage({
+      message: e.response.data.message,
+      grouping: true,
+      type: "warning",
+    });
   return Promise.reject(e)
 })
 
