@@ -5,6 +5,7 @@ import { getGoodsDetailAPI } from "@/apis/detail";
 import { fetchHotGoodsAPI } from "@/apis/detail";
 import { ref, onMounted } from "vue";
 import DetailHotVue from "./components/DetailHot.vue";
+import ImageView from '@/components/imageView/index.vue'
 
 const route = useRoute();
 const goodDetail = ref({});
@@ -47,7 +48,7 @@ onMounted(() => getDetail());
           <div class="goods-info">
             <div class="media">
               <!-- 图片预览区 -->
-
+              <ImageView></ImageView>
               <!-- 统计数量 -->
               <ul class="goods-sales">
                 <li>
@@ -131,9 +132,9 @@ onMounted(() => getDetail());
             <!-- 24热榜+专题推荐 -->
             <div class="goods-aside">
               <!-- 24h -->
-              <DetailHot></DetailHot>
+              <DetailHot :hotType="1"></DetailHot>
               <!-- 周 -->
-              <DetailHot></DetailHot>
+              <DetailHot :hotType="2"></DetailHot>
             </div>
           </div>
         </div>
