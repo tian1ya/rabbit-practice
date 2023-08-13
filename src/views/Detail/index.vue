@@ -6,6 +6,7 @@ import { fetchHotGoodsAPI } from "@/apis/detail";
 import { ref, onMounted } from "vue";
 import DetailHotVue from "./components/DetailHot.vue";
 import ImageView from '@/components/imageView/index.vue'
+import XtxSku from '@/components/XtxSku/index.vue'
 
 const route = useRoute();
 const goodDetail = ref({});
@@ -16,6 +17,11 @@ const getDetail = async () => {
 };
 
 onMounted(() => getDetail());
+
+// 当选中sku 的时候触发事件
+const skuChange = (sku) => {
+  console.log(sku);
+}
 </script>
 
 <template>
@@ -97,7 +103,7 @@ onMounted(() => getDetail());
                 </dl>
               </div>
               <!-- sku组件 -->
-
+              <XtxSku :goods = "goodDetail" @change="skuChange"></XtxSku>
               <!-- 数据组件 -->
 
               <!-- 按钮组件 -->
