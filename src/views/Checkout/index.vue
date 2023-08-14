@@ -1,6 +1,9 @@
 <script setup>
 import { getCheckoutInfoAPI } from "@/apis/checkout";
 import { ref } from "vue";
+import { useRouter } from "vue-router";
+
+const router = useRouter();
 
 const checkInfo = ref({}); // 订单对象
 const curAddress = ref({}); // 地址对象
@@ -32,6 +35,15 @@ const switchAddress = (item) => {
 const confirmAddress = () => {
   curAddress.value = activeAddress.value;
   showDialog.value = false
+}
+
+const submitOrder = () => {
+  router.push({
+    path: '/pay',
+    query: {
+      id: 12121212
+    }
+  })
 }
 </script>
 
@@ -142,7 +154,7 @@ const confirmAddress = () => {
         </div>
         <!-- 提交订单 -->
         <div class="submit">
-          <el-button type="primary" size="large">提交订单</el-button>
+          <el-button type="primary" size="large" @click="submitOrder">提交订单</el-button>
         </div>
       </div>
     </div>

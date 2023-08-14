@@ -13,6 +13,7 @@ import SubCategory from '@/views/SubCategory/index.vue'
 import Detail from '@/views/Detail/index.vue'
 import cartList from '@/views/cartList/index.vue'
 import Checkout from '@/views/Checkout/index.vue'
+import Pay from '@/views/Pay/index.vue'
 
 const router = createRouter({
   history: createWebHistory(
@@ -43,6 +44,9 @@ const router = createRouter({
   }, {
     path: '/login',
     component: Login
+  }, {
+    path:'/pay',
+    component: Pay
   }],
 
   // 路由行为定制, 切换路由的时候，回到顶部显示
