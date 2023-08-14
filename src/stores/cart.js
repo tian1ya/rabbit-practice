@@ -6,7 +6,9 @@ import {
   ref
 } from 'vue'
 
-import { computed } from "vue";
+import {
+  computed
+} from "vue";
 
 export const useCartStore = defineStore('cart', () => {
   // 1. 定义state - cartList
@@ -34,15 +36,38 @@ export const useCartStore = defineStore('cart', () => {
     cartList.value.splice(idx, 1)
   }
 
-  const allCount = computed(() => cartList.value.reduce((a,b) => a + b.count, 0))
-  const allPrice = computed(() => cartList.value.reduce((a,b) => a + b.count * b.price, 0))
+  const allCount = computed(() => cartList.value.reduce((a, b) => a + b.count, 0))
+  const allPrice = computed(() => cartList.value.reduce((a, b) => a + b.count * b.price, 0))
+
+  // 单选功能
+  const singleCheck = (skuId, selected) => {
+    // 通过skuId找到要修改的那一项 然后把它的selected修改为传过来的selected
+    const item = cartList.value.find((item) => item.skuId === skuId)
+    item.selected = selected
+  }
+
+  // 当前选中的个数
+  const allSelectedNum = computed(() => cartList.value.filter(a => a.selected === true).length)
+
+  const selectedPrice = computed(() => cartList.value.filter(item => item.selected).reduce((a, c) => a + c.count * c.price, 0))
+
+  const allCheck = (selected) => {
+    cartList.value.forEach(item => item.selected = selected)
+  }
+
+  const isAll = computed(() => cartList.value.every(item => item.selected))
 
   return {
     cartList,
     addCart,
     delCart,
     allCount,
-    allPrice
+    allPrice,
+    singleCheck,
+    allSelectedNum,
+    selectedPrice,
+    allCheck,
+    isAll
   }
 }, {
   persist: true,
