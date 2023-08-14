@@ -10,23 +10,49 @@ import {
   computed
 } from "vue";
 
+import {
+  useUserStore
+} from './user'
+
+import { insertCartAPI,findNewCartListAPI } from '@/apis/cart'
+
 export const useCartStore = defineStore('cart', () => {
+
+  const useStore = useUserStore();
+
+  const isLogin = computed(() => useStore.userInfo.token);
+
+  // 回去最新购物车方法
+  const updateNewList = async () => {
+    const res = await findNewCartListAPI();
+    cartList.value = res.result;
+  }
+
   // 1. 定义state - cartList
   const cartList = ref([])
   // 2. 定义action - addCart
-  const addCart = (goods) => {
-    // 添加购物车操作
-    // 已添加过 - count + 1
-    // 没有添加过 - 直接push
-    // 思路：通过匹配传递过来的商品对象中的skuId能不能在cartList中找到，找到了就是添加过
-    const item = cartList.value.find((item) => goods.skuId === item.skuId)
-    if (item) {
-      // 找到了
-      item.count++
+  const addCart = async (goods) => {
+
+    if (false) {
+      // 已经登录了，将购物车同步到服务器
+      // await insertCartAPI({ skuId, count })
+      // updateNewList()
     } else {
-      // 没找到
-      cartList.value.push(goods)
+      // 没有登录，购物车都在本地
+      // 添加购物车操作
+      // 已添加过 - count + 1
+      // 没有添加过 - 直接push
+      // 思路：通过匹配传递过来的商品对象中的skuId能不能在cartList中找到，找到了就是添加过
+      const item = cartList.value.find((item) => goods.skuId === item.skuId)
+      if (item) {
+        // 找到了
+        item.count++
+      } else {
+        // 没找到
+        cartList.value.push(goods)
+      }
     }
+
   }
 
   const delCart = async (skuId) => {
@@ -36,6 +62,19 @@ export const useCartStore = defineStore('cart', () => {
     cartList.value.splice(idx, 1)
   }
 
+  // const delCart = async (skuId) => {
+  //   if (isLogin.value) {
+  //     // 调用接口实现接口购物车中的删除功能
+  //     await delCartAPI([skuId])
+  //     updateNewList()
+  //   } else {
+  //     // 思路：
+  //     // 1. 找到要删除项的下标值 - splice
+  //     // 2. 使用数组的过滤方法 - filter
+  //     const idx = cartList.value.findIndex((item) => skuId === item.skuId)
+  //     cartList.value.splice(idx, 1)
+  //   }
+  // }
   const allCount = computed(() => cartList.value.reduce((a, b) => a + b.count, 0))
   const allPrice = computed(() => cartList.value.reduce((a, b) => a + b.count * b.price, 0))
 
