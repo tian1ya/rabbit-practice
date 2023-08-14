@@ -96,6 +96,7 @@ export const useCartStore = defineStore('cart', () => {
 
   const isAll = computed(() => cartList.value.every(item => item.selected))
 
+  const clearCartList = () => cartList.value = []
   return {
     cartList,
     addCart,
@@ -106,7 +107,8 @@ export const useCartStore = defineStore('cart', () => {
     allSelectedNum,
     selectedPrice,
     allCheck,
-    isAll
+    isAll,
+    clearCartList
   }
 }, {
   persist: true,
