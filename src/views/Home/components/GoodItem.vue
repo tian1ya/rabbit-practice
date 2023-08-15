@@ -14,6 +14,7 @@ defineProps({
     <p class="desc ellipsis">{{ goods.desc }}</p>
     <p class="price">&yen;{{ goods.price }}</p>
   </RouterLink>
+  <div>a</div>
 </template>
 
 <style scoped lang="scss">
