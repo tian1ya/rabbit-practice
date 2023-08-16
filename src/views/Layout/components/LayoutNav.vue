@@ -18,7 +18,11 @@ const logoutConfirm = () => {
   <nav class="app-topnav">
     <div class="container">
       <ul>
-        <!-- 多模板渲染，区分登录状态和非登录状态, token 存在，那么就是登录状态 -->
+        <!-- 
+          多模板渲染，区分登录状态和非登录状态, token 存在，那么就是登录状态
+        　template的作用是模板占位符，可帮助我们包裹元素，
+          但在循环/判断过程当中，template不会被渲染到页面上 
+        -->
         <template v-if="userStore.userInfo.token">
           <li><a href="javascript:;"><i class="iconfont icon-user"></i>{{ userStore.userInfo.account }}</a></li>
           <li>
@@ -48,7 +52,9 @@ const logoutConfirm = () => {
   ul {
     display: flex;
     height: 53px;
+    // 主轴上右向左布局
     justify-content: flex-end;
+    // 辅周上，弹性子元素居中
     align-items: center;
     li {
       a {

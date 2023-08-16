@@ -36,6 +36,7 @@ const categoryStore = useCategoryStore()
 
   .container {
     display: flex;
+    // 弹性子元素在辅轴上的布局
     align-items: center;
   }
 
@@ -57,6 +58,9 @@ const categoryStore = useCategoryStore()
     display: flex;
     padding-left: 40px;
     position: relative;
+    // 属性设定了一个定位元素及其后代元素或 flex 项目的 
+    // z-order。当元素之间重叠的时候，z-index 
+    // 较大的元素会覆盖较小的元素在上层进行显示
     z-index: 998;
 
     li {

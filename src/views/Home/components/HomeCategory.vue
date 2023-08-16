@@ -51,6 +51,10 @@ const categoryStore = useCategoryStore()
 
       &:hover {
         background: $xtxColor;
+
+        .layer {
+          display: block;
+        }
       }
 
       a {
@@ -69,6 +73,8 @@ const categoryStore = useCategoryStore()
         position: absolute;
         left: 250px;
         top: 0;
+        // 默认值，通常与 JavaScript 一起使用，以隐藏和显示元素
+        // none 的时候什么也不显示
         display: none;
         padding: 0 15px;
 
@@ -145,11 +151,11 @@ const categoryStore = useCategoryStore()
       }
 
       // 关键样式  hover状态下的layer盒子变成block
-      &:hover {
-        .layer {
-          display: block;
-        }
-      }
+      // &:hover {
+      //   .layer {
+      //     display: block;
+      //   }
+      // }
     }
   }
 }

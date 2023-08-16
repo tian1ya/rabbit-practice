@@ -3,6 +3,7 @@ import { useScroll } from '@vueuse/core'
 import { useCategoryStore } from '@/stores/category'
 
 const categoryStore = useCategoryStore()
+// 响应式获取滚动位置和状态
 const { x, y, isScrolling, arrivedState, directions } = useScroll(window)
 
 </script>
@@ -37,7 +38,13 @@ const { x, y, isScrolling, arrivedState, directions } = useScroll(window)
   background-color: #fff;
   border-bottom: 1px solid #e4e4e4;
   // 此处为关键样式!!!
-  // 状态一：往上平移自身高度 + 完全透明(opacity: 0)
+  // 状态一：往上平移自身高度(全部移走，消失) 
+  // + 完全透明(opacity: 0)
+  // 对应的还有 translate(x,y) x 和 y 方向的平移
+  // translateX X方向的平移
+  // 去 + 值的时候x/y是右/下方向平移
+  // 去 - 值的时候x/y是左/上方向平移
+  // scale(x,y) x 和 y 方向的缩放
   transform: translateY(-100%);
   opacity: 0;
 

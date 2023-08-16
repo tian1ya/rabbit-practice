@@ -56,6 +56,7 @@ onMounted(() => newsApi());
       font-size: 22px;
       padding-top: 12px;
       text-align: center;
+      // ellipsis 省略，溢出字体省略
       text-overflow: ellipsis;
       overflow: hidden;
       white-space: nowrap;
